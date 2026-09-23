@@ -1,777 +1,433 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <script>document.documentElement.classList.add('js-ready');</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Petro Poliakov | Web Developer & Fundador de netlleuger</title>
-    <meta name="description" content="Petro Poliakov — fundador de netlleuger. Desarrollo web ligero, rápido y accesible. HTML5, CSS3, JavaScript. Barcelona.">
-    <meta name="author" content="Petro Poliakov">
-    <link rel="canonical" href="https://netlleuger.github.io/">
-
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Petro Poliakov | Web Developer & Fundador de netlleuger">
-    <meta property="og:description" content="Creo sitios web ligeros, rápidos y accesibles. HTML5, CSS3, JavaScript. Barcelona.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://netlleuger.github.io/">
-    <meta property="og:image" content="https://netlleuger.github.io/og-image.png">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0d1117;
-            --bg-2: #161b22;
-            --text: #e6edf3;
-            --muted: #8b949e;
-            --accent-1: #00c6ff;
-            --accent-2: #a855f7;
-            --border: #30363d;
-            --gradient: linear-gradient(90deg, #00c6ff 0%, #a855f7 100%);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a { color: var(--accent-1); text-decoration: none; transition: 0.3s; }
-        a:hover { color: var(--accent-2); }
-
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-
-        /* === ACCESSIBILITY === */
-        :focus-visible {
-            outline: 2px solid var(--accent-1);
-            outline-offset: 2px;
-            border-radius: 4px;
-        }
-
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-1);
-            color: #000;
-            padding: 8px 16px;
-            z-index: 9999;
-            transition: top 0.3s;
-        }
-        .skip-link:focus { top: 0; }
-
-        /* === NAVIGATION === */
-        header {
-            position: fixed; top: 0; left: 0; right: 0;
-            background: rgba(13, 17, 23, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            padding: 16px 0;
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--text);
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--muted);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover { color: var(--text); }
-
-        /* Mobile Menu Button */
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            color: var(--text);
-        }
-
-        .nav-toggle span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--text);
-            margin: 5px 0;
-            transition: 0.3s;
-        }
-
-        /* === HERO === */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 0 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute; top: -50%; right: -20%;
-            width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute; bottom: -50%; left: -20%;
-            width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(0, 198, 255, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 8s ease-in-out infinite reverse;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-        }
-
-        .hero-content { position: relative; z-index: 1; max-width: 800px; }
-
-        .hero-code {
-            color: var(--accent-1);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--muted);
-            margin-bottom: 40px;
-            max-width: 600px;
-        }
-
-        .hero-availability {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(0, 198, 255, 0.1);
-            border: 1px solid var(--accent-1);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--accent-1);
-            margin-bottom: 24px;
-            font-weight: 600;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: 0.3s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--gradient);
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
-            color: #fff;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-            margin-left: 12px;
-        }
-
-        .btn-secondary:hover { border-color: var(--accent-1); color: var(--accent-1); }
-
-        /* === SECTIONS === */
-        section { padding: 100px 0; }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-
-        .section-title span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            color: var(--muted);
-            font-size: 1.1rem;
-            margin-bottom: 60px;
-            max-width: 600px;
-        }
-
-        /* === ABOUT === */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-text p { color: var(--muted); margin-bottom: 20px; font-size: 1.05rem; }
-        .about-text strong { color: var(--text); }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .stat-card {
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px;
-            transition: 0.3s;
-        }
-
-        .stat-card:hover {
-            border-color: var(--accent-2);
-            transform: translateY(-4px);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-
-        .stat-label { color: var(--muted); font-size: 0.95rem; }
-
-        /* === SKILLS === */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-        }
-
-        .skill-card {
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
-            transition: 0.3s;
-        }
-
-        .skill-card:hover {
-            border-color: var(--accent-1);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 40px rgba(0, 198, 255, 0.1);
-        }
-
-        .skill-icon {
-            width: 48px; height: 48px;
-            border-radius: 10px;
-            background: var(--gradient);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .skill-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
-        .skill-card p { color: var(--muted); font-size: 0.95rem; }
-
-        /* === PROJECTS === */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 28px;
-        }
-
-        .project-card {
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            border-color: var(--accent-2);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(168, 85, 247, 0.15);
-        }
-
-        .project-tag {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(0, 198, 255, 0.1);
-            color: var(--accent-1);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            width: fit-content;
-        }
-
-        .project-card h3 { font-size: 1.3rem; margin-bottom: 12px; }
-        .project-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
-
-        .project-tech {
-            display: flex; gap: 8px; flex-wrap: wrap;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            margin-bottom: 16px;
-        }
-
-        .project-tech span {
-            font-size: 0.8rem;
-            color: var(--muted);
-            padding: 4px 10px;
-            background: var(--bg);
-            border-radius: 6px;
-        }
-
-        .project-links { display: flex; gap: 16px; }
-
-        .project-links a {
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        /* === EXPERIENCE === */
-        .timeline { position: relative; padding-left: 32px; }
-
-        .timeline::before {
-            content: '';
-            position: absolute; left: 8px; top: 0; bottom: 0;
-            width: 2px;
-            background: var(--border);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 48px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute; left: -32px; top: 6px;
-            width: 18px; height: 18px;
-            border-radius: 50%;
-            background: var(--gradient);
-            border: 3px solid var(--bg);
-        }
-
-        .timeline-date {
-            color: var(--accent-1);
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .timeline-item h3 { font-size: 1.2rem; margin-bottom: 4px; }
-        .timeline-company { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px; }
-        .timeline-item p { color: var(--muted); font-size: 0.95rem; }
-
-        /* === CONTACT === */
-        .contact {
-            text-align: center;
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 80px 40px;
-        }
-
-        .contact h2 { font-size: 2.5rem; margin-bottom: 16px; }
-        .contact p { color: var(--muted); margin-bottom: 40px; font-size: 1.1rem; }
-
-        .contact-links {
-            display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
-        }
-
-        .contact-link {
-            display: flex; align-items: center; gap: 10px;
-            padding: 14px 28px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text);
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .contact-link:hover {
-            border-color: var(--accent-1);
-            color: var(--accent-1);
-            transform: translateY(-2px);
-        }
-
-        /* === FOOTER === */
-        footer {
-            padding: 40px 0;
-            text-align: center;
-            color: var(--muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border);
-        }
-
-        /* === ANIMATIONS === */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* === MOBILE === */
-        @media (max-width: 768px) {
-            .nav-toggle { display: block; }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--bg);
-                border-bottom: 1px solid var(--border);
-                flex-direction: column;
-                padding: 24px;
-                gap: 20px;
-            }
-
-            .nav-links.active { display: flex; }
-
-            .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .btn-secondary { margin-left: 0; margin-top: 12px; }
-            section { padding: 60px 0; }
-            .hero h1 { font-size: 2.5rem; }
-            .contact { padding: 60px 24px; }
-            .contact h2 { font-size: 1.8rem; }
-        }
-
-        /* === REDUCED MOTION === */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desarrollo web freelance en Barcelona | netlleuger — Petro Poliakov</title>
+  <meta name="description" content="Desarrollo webs modernas, rápidas y adaptadas a móvil para autónomos y pequeños negocios en Barcelona y online. HTML, CSS y JavaScript. Presupuesto sin compromiso.">
+  <meta name="author" content="Petro Poliakov">
+  <meta name="theme-color" content="#05070b">
+  <link rel="canonical" href="https://netlleuger.github.io/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="netlleuger — Desarrollo web freelance en Barcelona">
+  <meta property="og:description" content="Webs modernas, rápidas y adaptadas a móvil para autónomos y pequeños negocios.">
+  <meta property="og:url" content="https://netlleuger.github.io/">
+  <meta property="og:image" content="https://netlleuger.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="netlleuger — Web Developer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="netlleuger — Desarrollo web freelance en Barcelona">
+  <meta name="twitter:description" content="Webs modernas, rápidas y adaptadas a móvil para autónomos y pequeños negocios.">
+  <meta name="twitter:image" content="https://netlleuger.github.io/og-image.png">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
+  <style>
+    :root {
+      --bg: #05070b;
+      --surface: #0b0f16;
+      --surface-2: #101621;
+      --text: #f5f7fb;
+      --muted: #a2adbd;
+      --muted-2: #718096;
+      --cyan: #00c6ff;
+      --blue: #168cff;
+      --purple: #8b5cf6;
+      --border: rgba(255,255,255,.09);
+      --border-strong: rgba(0,198,255,.28);
+      --gradient: linear-gradient(110deg,#08d7e9 0%,#168cff 42%,#7442f5 100%);
+      --container: 1120px;
+      --radius: 20px;
+      --shadow: 0 24px 70px rgba(0,0,0,.28);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 85% 5%, rgba(112,55,255,.11), transparent 28%),
+        radial-gradient(circle at 8% 45%, rgba(0,198,255,.07), transparent 24%);
+      z-index: -1;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+
+    .skip-link {
+      position: fixed; left: 16px; top: -60px; z-index: 9999;
+      padding: 10px 16px; border-radius: 10px;
+      background: var(--cyan); color: #001018; font-weight: 700;
+    }
+    .skip-link:focus { top: 16px; }
+    .container { width: min(var(--container), calc(100% - 40px)); margin-inline: auto; }
+
+    header {
+      position: fixed; inset: 0 0 auto; z-index: 1000;
+      background: rgba(5,7,11,.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 1.18rem; font-weight: 800; letter-spacing: -.03em; }
+    .brand img { width: 36px; height: 36px; object-fit: contain; border-radius: 8px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .9rem; font-weight: 600; transition: color .2s ease; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { color: #fff !important; padding: 9px 15px; border: 1px solid var(--border-strong); border-radius: 999px; background: rgba(0,198,255,.07); }
+    .nav-toggle { display: none; border: 1px solid var(--border); background: var(--surface); color: #fff; border-radius: 10px; padding: 9px; cursor: pointer; }
+    .nav-toggle span { display: block; width: 21px; height: 2px; margin: 4px; background: #fff; border-radius: 99px; }
+
+    .hero { min-height: 100svh; display: grid; align-items: center; padding: 140px 0 90px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 70px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #b9c4d5; font-size: .86rem; font-weight: 700; letter-spacing: .02em; margin-bottom: 22px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #36e58c; box-shadow: 0 0 0 5px rgba(54,229,140,.1); }
+    h1 { max-width: 820px; font-size: clamp(3rem, 7vw, 5.8rem); line-height: .98; letter-spacing: -.065em; font-weight: 800; }
+    .gradient-text { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-lead { max-width: 690px; margin: 28px 0 34px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.22rem); }
+    .hero-lead strong { color: #edf2f8; font-weight: 600; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 20px; border-radius: 12px; font-weight: 700; font-size: .95rem; border: 1px solid var(--border); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { border: 0; color: #fff; background: var(--gradient); box-shadow: 0 14px 35px rgba(43,95,255,.22); }
+    .btn-secondary { background: rgba(255,255,255,.025); color: #fff; }
+    .btn-secondary:hover { border-color: var(--border-strong); }
+
+    .hero-card { position: relative; min-height: 430px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012)); box-shadow: var(--shadow); overflow: hidden; }
+    .hero-card::before { content:""; position:absolute; width:320px; height:320px; border-radius:50%; background: radial-gradient(circle,rgba(0,198,255,.22),transparent 68%); filter: blur(8px); }
+    .hero-card::after { content:""; position:absolute; width:280px; height:280px; right:-110px; bottom:-130px; border-radius:50%; background: radial-gradient(circle,rgba(139,92,246,.28),transparent 68%); }
+    .hero-logo { position: relative; width: min(78%, 390px); filter: drop-shadow(0 22px 40px rgba(0,114,255,.18)); }
+    .hero-note { position: absolute; left: 22px; bottom: 20px; right: 22px; display: flex; justify-content: space-between; gap: 12px; color: var(--muted-2); font-size: .76rem; text-transform: uppercase; letter-spacing: .11em; }
+
+    section { padding: 105px 0; }
+    .section-head { max-width: 720px; margin-bottom: 48px; }
+    .kicker { color: var(--cyan); text-transform: uppercase; letter-spacing: .14em; font-size: .73rem; font-weight: 800; margin-bottom: 12px; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.08; letter-spacing: -.045em; }
+    .section-head p { color: var(--muted); margin-top: 15px; font-size: 1.04rem; }
+
+    .services { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .card { border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012)); padding: 28px; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-4px); border-color: rgba(0,198,255,.24); box-shadow: 0 18px 50px rgba(0,0,0,.22); }
+    .icon { width: 44px; height: 44px; display:grid; place-items:center; border-radius: 12px; background: rgba(0,198,255,.09); border: 1px solid rgba(0,198,255,.15); color: var(--cyan); font-weight: 800; margin-bottom: 20px; }
+    .card h3 { font-size: 1.15rem; margin-bottom: 9px; }
+    .card p { color: var(--muted); font-size: .92rem; }
+    .card ul { list-style: none; margin-top: 17px; display: grid; gap: 7px; }
+    .card li { color: #c8d1de; font-size: .86rem; }
+    .card li::before { content: "✓"; color: var(--cyan); margin-right: 8px; }
+
+    .proof { display:grid; grid-template-columns: .85fr 1.15fr; gap: 65px; align-items: start; }
+    .proof-copy p { color: var(--muted); margin-top: 17px; font-size: 1rem; }
+    .stats { display:grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .stat { padding: 23px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
+    .stat strong { display:block; font-size: 2rem; line-height:1; letter-spacing:-.04em; background:var(--gradient); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:8px; }
+    .stat span { color: var(--muted); font-size: .84rem; }
+
+    .project { display:grid; grid-template-columns: 1.05fr .95fr; gap: 0; border: 1px solid var(--border); border-radius: 24px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
+    .project-visual { min-height: 380px; display:grid; place-items:center; padding: 35px; background: radial-gradient(circle at 50% 40%,rgba(0,198,255,.12),transparent 42%), #080b11; }
+    .project-visual img { width: min(90%, 560px); border-radius: 15px; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+    .project-info { padding: 44px; display:flex; flex-direction:column; justify-content:center; }
+    .tag { display:inline-flex; width:max-content; padding:6px 10px; border-radius:999px; border:1px solid rgba(0,198,255,.18); color:var(--cyan); background:rgba(0,198,255,.06); font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; margin-bottom:16px; }
+    .project-info h3 { font-size: 1.7rem; margin-bottom: 12px; }
+    .project-info p { color: var(--muted); font-size: .94rem; }
+    .tech { display:flex; flex-wrap:wrap; gap:7px; margin:22px 0; }
+    .tech span { padding:5px 9px; border-radius:7px; background:#070a0f; border:1px solid var(--border); color:#b8c2d0; font-size:.75rem; }
+
+    .process { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; counter-reset:step; }
+    .step { position:relative; padding:28px; border-top:1px solid var(--border); }
+    .step::before { counter-increment:step; content:"0" counter(step); display:block; color:var(--cyan); font-size:.72rem; font-weight:800; letter-spacing:.12em; margin-bottom:30px; }
+    .step h3 { margin-bottom:8px; }
+    .step p { color:var(--muted); font-size:.9rem; }
+
+    .experience { display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+    .experience .card { padding:25px; }
+    .date { color:var(--cyan); font-size:.74rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; }
+    .company { color:var(--muted-2); font-size:.82rem; margin-top:3px; }
+
+    .contact-wrap { position:relative; overflow:hidden; text-align:center; padding:75px 30px; border:1px solid rgba(0,198,255,.18); border-radius:28px; background: radial-gradient(circle at 50% 0%,rgba(0,198,255,.11),transparent 44%), linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.012)); }
+    .contact-wrap p { max-width:620px; margin:16px auto 30px; color:var(--muted); }
+    .contact-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
+    .contact-meta { margin-top:24px; color:var(--muted-2); font-size:.8rem; }
+
+    footer { padding:35px 0 45px; border-top:1px solid var(--border); color:var(--muted-2); font-size:.8rem; }
+    .footer-row { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+
+    .js .reveal { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+    .js .reveal.visible { opacity:1; transform:none; }
+
+    @media (max-width: 900px) {
+      .hero-grid,.proof,.project { grid-template-columns:1fr; }
+      .hero-card { min-height:350px; }
+      .services,.process { grid-template-columns:1fr; }
+      .experience { grid-template-columns:1fr; }
+      .project-visual { min-height:auto; }
+    }
+    @media (max-width: 720px) {
+      .container { width:min(var(--container),calc(100% - 28px)); }
+      nav { min-height:68px; }
+      .nav-toggle { display:block; }
+      .nav-links { display:none; position:absolute; left:14px; right:14px; top:74px; padding:15px; flex-direction:column; align-items:stretch; gap:3px; border:1px solid var(--border); border-radius:16px; background:rgba(9,12,18,.97); box-shadow:var(--shadow); }
+      .nav-links.open { display:flex; }
+      .nav-links a { display:block; padding:12px 13px; border-radius:9px; }
+      .nav-links a:hover { background:rgba(255,255,255,.04); }
+      .nav-cta { text-align:center; margin-top:5px; }
+      .hero { padding-top:110px; }
+      h1 { font-size:clamp(2.8rem,14vw,4.2rem); }
+      .hero-card { min-height:300px; }
+      .hero-logo { width:74%; }
+      .hero-note { font-size:.62rem; }
+      section { padding:78px 0; }
+      .stats { grid-template-columns:1fr 1fr; }
+      .project-info { padding:28px; }
+      .contact-wrap { padding:55px 20px; }
+      .footer-row { flex-direction:column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; transition-duration:.01ms !important; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ProfessionalService",
+    "name":"netlleuger",
+    "url":"https://netlleuger.github.io/",
+    "image":"https://netlleuger.github.io/og-image.png",
+    "description":"Desarrollo web freelance para autónomos y pequeños negocios.",
+    "founder":{"@type":"Person","name":"Petro Poliakov","jobTitle":"Web Developer"},
+    "areaServed":["Barcelona","Catalunya","España"],
+    "sameAs":[
+      "https://www.linkedin.com/in/petro-polyakov-a09a90238/",
+      "https://github.com/netlleuger"
+    ],
+    "email":"netlleuger@gmail.com"
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  <header>
+    <div class="container">
+      <nav aria-label="Navegación principal">
+        <a class="brand" href="#top" aria-label="netlleuger, inicio">
+          <img src="favicon.svg" alt="" width="36" height="36">
+          <span>netlleuger</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#proyecto">Proyecto</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a class="nav-cta" href="#contacto">Hablemos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- HEADER / NAVIGATION -->
-    <header>
-        <nav aria-label="Navegación principal">
-            <div class="container">
-                <a href="#" class="logo" aria-label="netlleuger - Inicio">
-                    <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#00c6ff" />
-                                <stop offset="100%" style="stop-color:#a855f7" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M25 35 L15 50 L25 65" stroke="url(#grad)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M50 25 L50 75 L75 50 Z" fill="url(#grad)" opacity="0.9"/>
-                        <path d="M75 35 L85 50 L75 65" stroke="url(#grad)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    netlleuger
-                </a>
-
-                <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-
-                <ul class="nav-links" id="nav-menu" role="menubar">
-                    <li role="none"><a href="#about" role="menuitem">Sobre mí</a></li>
-                    <li role="none"><a href="#skills" role="menuitem">Habilidades</a></li>
-                    <li role="none"><a href="#projects" role="menuitem">Proyectos</a></li>
-                    <li role="none"><a href="#experience" role="menuitem">Experiencia</a></li>
-                    <li role="none"><a href="#contact" role="menuitem">Contacto</a></li>
-                </ul>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <div class="eyebrow"><span class="dot" aria-hidden="true"></span> Disponible para proyectos freelance</div>
+            <h1>Webs que hacen que tu negocio <span class="gradient-text">se vea profesional.</span></h1>
+            <p class="hero-lead">Soy <strong>Petro Poliakov</strong>, desarrollador web y fundador de <strong>netlleuger</strong>. Creo sitios modernos, rápidos y adaptados a móvil para autónomos y pequeños negocios en Barcelona y online.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="#contacto">Quiero mi web <span aria-hidden="true">→</span></a>
+              <a class="btn btn-secondary" href="#proyecto">Ver trabajo</a>
             </div>
-        </nav>
-    </header>
+          </div>
 
-    <main id="main-content">
-
-        <!-- HERO -->
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-code">&lt;hola mundo /&gt;</div>
-                    <div class="hero-availability">✅ Disponible para proyectos</div>
-                    <h1 id="hero-title">Petro Poliakov<br>Web Developer & Fundador de netlleuger</h1>
-                    <p>Combino <strong>20+ años de experiencia en gestión de proyectos y liderazgo de equipos</strong> con una nueva especialización en desarrollo web. Creo sitios ligeros, rápidos y accesibles que generan resultados reales para negocios y profesionales.</p>
-                    <a href="#contact" class="btn btn-primary">Hablemos</a>
-                    <a href="#projects" class="btn btn-secondary">Ver proyectos</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ABOUT -->
-        <section id="about" aria-labelledby="about-title">
-            <div class="container">
-                <h2 class="section-title reveal" id="about-title">Sobre <span>mí</span></h2>
-                <p class="section-subtitle reveal">Desarrollador web con base en Barcelona, combinando tecnología y 20 años de experiencia en gestión de proyectos.</p>
-                <div class="about-grid">
-                    <div class="about-text reveal">
-                        <p>Mi nombre es <strong>Petro Poliakov</strong>, y soy el fundador de <strong>netlleuger</strong>. El nombre combina <em>net</em> (red/internet) y <em>lleuger</em> (ligero/rápido en catalán): una filosofía basada en la eficiencia, la claridad y la cercanía.</p>
-                        <p>Actualmente finalizo el <strong>Certificado de Profesionalidad IFCD0110</strong> (Confección y Publicación de Páginas Web) y combino mis conocimientos en HTML5, CSS3 y JavaScript con más de 20 años de experiencia gestionando proyectos complejos y liderando equipos.</p>
-                        <p>Aprendo rápido, soy autodidacta y me apasiona convertir ideas en soluciones web funcionales.</p>
-                    </div>
-                    <div class="about-stats reveal">
-                        <div class="stat-card">
-                            <div class="stat-number">20+</div>
-                            <div class="stat-label">Años de experiencia profesional</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">4</div>
-                            <div class="stat-label">Idiomas</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">B2</div>
-                            <div class="stat-label">Español</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Compromiso</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SKILLS -->
-        <section id="skills" aria-labelledby="skills-title">
-            <div class="container">
-                <h2 class="section-title reveal" id="skills-title">Mis <span>habilidades</span></h2>
-                <p class="section-subtitle reveal">Tecnologías y competencias que aplico en cada proyecto.</p>
-                <div class="skills-grid">
-                    <div class="skill-card reveal">
-                        <div class="skill-icon" aria-hidden="true">&lt;/&gt;</div>
-                        <h3>Desarrollo Web</h3>
-                        <p>HTML5 semántico y accesible, CSS3 con Flexbox y diseño responsivo, JavaScript (DOM, eventos, objetos).</p>
-                    </div>
-                    <div class="skill-card reveal">
-                        <div class="skill-icon" aria-hidden="true">⚙️</div>
-                        <h3>Herramientas</h3>
-                        <p>VS Code, Git básico, DevTools para depuración, documentación y organización de código.</p>
-                    </div>
-                    <div class="skill-card reveal">
-                        <div class="skill-icon" aria-hidden="true">🎯</div>
-                        <h3>Gestión de Proyectos</h3>
-                        <p>Coordinación de equipos, control de plazos y presupuestos, resolución de problemas técnicos.</p>
-                    </div>
-                    <div class="skill-card reveal">
-                        <div class="skill-icon" aria-hidden="true">🌍</div>
-                        <h3>Idiomas</h3>
-                        <p>Ruso y ucraniano (nativos), español (B2), inglés (A2). Comunicación clara y directa.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PROJECTS -->
-        <section id="projects" aria-labelledby="projects-title">
-            <div class="container">
-                <h2 class="section-title reveal" id="projects-title">Mis <span>proyectos</span></h2>
-                <p class="section-subtitle reveal">Una selección de trabajos donde aplico mis conocimientos en desarrollo web.</p>
-                <div class="projects-grid">
-                    <div class="project-card reveal">
-                        <span class="project-tag">Portfolio Personal</span>
-                        <h3>netlleuger.github.io</h3>
-                        <p>Este mismo sitio web. Diseño moderno, responsivo y optimizado, construido desde cero con HTML, CSS y JavaScript vanilla. Incluye accesibilidad WCAG, SEO con Open Graph y animaciones respetando prefers-reduced-motion.</p>
-                        <div class="project-tech">
-                            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Accesibilidad</span><span>SEO</span><span>GitHub Pages</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://netlleuger.github.io" target="_blank" rel="noopener">Demo →</a>
-                            <a href="https://github.com/netlleuger/netlleuger.github.io" target="_blank" rel="noopener">GitHub →</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal">
-                        <span class="project-tag">Próximamente</span>
-                        <h3>Landing Page para negocio local</h3>
-                        <p>Sitio web de presentación para un negocio de Barcelona, con diseño moderno, secciones de servicios y formulario de contacto funcional.</p>
-                        <div class="project-tech">
-                            <span>HTML5</span><span>CSS3</span><span>Flexbox</span><span>Responsive</span><span>Formularios</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" target="_blank" rel="noopener">Demo →</a>
-                            <a href="#" target="_blank" rel="noopener">GitHub →</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal">
-                        <span class="project-tag">Próximamente</span>
-                        <h3>Aplicación JavaScript interactiva</h3>
-                        <p>Aplicación web para demostrar dominio del DOM, manejo de eventos, lógica condicional y almacenamiento local en JavaScript.</p>
-                        <div class="project-tech">
-                            <span>JavaScript</span><span>DOM</span><span>Eventos</span><span>LocalStorage</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" target="_blank" rel="noopener">Demo →</a>
-                            <a href="#" target="_blank" rel="noopener">GitHub →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- EXPERIENCE -->
-        <section id="experience" aria-labelledby="experience-title">
-            <div class="container">
-                <h2 class="section-title reveal" id="experience-title">Mi <span>trayectoria</span></h2>
-                <p class="section-subtitle reveal">Experiencia profesional relevante que aporta valor a mi perfil como desarrollador.</p>
-                <div class="timeline">
-                    <div class="timeline-item reveal">
-                        <div class="timeline-date">2023 — 2026</div>
-                        <h3>Oficial de Control de Acceso y Seguridad</h3>
-                        <div class="timeline-company">SIP Maresme · Barcelona</div>
-                        <p>Instalación, programación y mantenimiento de sistemas CCTV, control de acceso y alarmas. Diagnóstico y resolución de fallos técnicos en sistemas electrónicos.</p>
-                    </div>
-                    <div class="timeline-item reveal">
-                        <div class="timeline-date">2018 — 2021</div>
-                        <h3>Encargado de Obras</h3>
-                        <div class="timeline-company">Sanolbar S.L. · Barcelona</div>
-                        <p>Coordinación de proyectos de reforma integral con equipos multidisciplinares. Gestión de presupuestos, proveedores y control de calidad.</p>
-                    </div>
-                    <div class="timeline-item reveal">
-                        <div class="timeline-date">2004 — 2017</div>
-                        <h3>Gestión Comercial y Dirección de Ventas</h3>
-                        <div class="timeline-company">Ucrania, Polonia y España</div>
-                        <p>Importación, gestión comercial y dirección de proyectos internacionales. Desarrollo de habilidades en liderazgo, negociación y coordinación de equipos.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section id="contact" aria-labelledby="contact-title">
-            <div class="container">
-                <div class="contact reveal">
-                    <h2 id="contact-title">¿Trabajamos <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">juntos</span>?</h2>
-                    <p>Estoy abierto a proyectos freelance, colaboraciones y oportunidades en Barcelona y alrededores.</p>
-                    <div class="contact-links">
-                        <a href="mailto:netlleuger@gmail.com" class="contact-link" aria-label="Enviar email a netlleuger">📩 netlleuger@gmail.com</a>
-                        <a href="https://www.linkedin.com/in/petro-polyakov-a09a90238/" target="_blank" rel="noopener" class="contact-link" aria-label="Perfil de LinkedIn de Petro Poliakov">💼 LinkedIn</a>
-                        <a href="https://github.com/netlleuger" target="_blank" rel="noopener" class="contact-link" aria-label="Perfil de GitHub de netlleuger">💻 GitHub</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <p>© 2026 netlleuger · Petro Poliakov · Hecho con ❤️ en Barcelona</p>
+          <div class="hero-card reveal" aria-label="Identidad visual de netlleuger">
+            <img class="hero-logo" src="netlleuger-logo-transparent.svg" alt="netlleuger">
+            <div class="hero-note"><span>HTML · CSS · JS</span><span>Barcelona · Online</span></div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script>
-        // --- Mobile Menu Toggle ---
-        const navToggle = document.querySelector('.nav-toggle');
-        const navLinks = document.querySelector('.nav-links');
+    <section id="servicios">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">Servicios</div>
+          <h2>Una web clara. <span class="gradient-text">Sin complicaciones.</span></h2>
+          <p>Soluciones enfocadas en lo que necesita un negocio pequeño: presencia profesional, móvil, velocidad y una forma sencilla de contactar.</p>
+        </div>
+        <div class="services">
+          <article class="card reveal">
+            <div class="icon" aria-hidden="true">&lt;/&gt;</div>
+            <h3>Web corporativa</h3>
+            <p>Una web profesional para explicar quién eres, qué haces y por qué un cliente debería contactarte.</p>
+            <ul><li>Diseño responsive</li><li>Estructura clara</li><li>Contacto directo</li></ul>
+          </article>
+          <article class="card reveal">
+            <div class="icon" aria-hidden="true">↗</div>
+            <h3>Landing page</h3>
+            <p>Una página enfocada en un servicio, campaña o producto, con una llamada a la acción clara.</p>
+            <ul><li>Una propuesta, un objetivo</li><li>Mobile-first</li><li>SEO técnico básico</li></ul>
+          </article>
+          <article class="card reveal">
+            <div class="icon" aria-hidden="true">⚡</div>
+            <h3>Mejora y renovación</h3>
+            <p>Si tu web se ve antigua, carga mal o no funciona bien en móvil, puedo ayudarte a modernizarla.</p>
+            <ul><li>HTML / CSS / JavaScript</li><li>Rendimiento</li><li>Accesibilidad</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        navToggle.addEventListener('click', () => {
-            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-            navToggle.setAttribute('aria-expanded', !isExpanded);
-            navLinks.classList.toggle('active');
+    <section id="proyecto">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">Trabajo publicado</div>
+          <h2>Mi primer proyecto es <span class="gradient-text">netlleuger.</span></h2>
+          <p>Un proyecto propio construido desde cero para demostrar cómo trabajo y cómo entiendo el desarrollo web.</p>
+        </div>
+        <article class="project reveal">
+          <div class="project-visual">
+            <img src="og-image.png" alt="Vista previa de la identidad visual de netlleuger" width="1200" height="630" loading="lazy">
+          </div>
+          <div class="project-info">
+            <span class="tag">Proyecto propio · Producción</span>
+            <h3>Portfolio y marca digital de netlleuger</h3>
+            <p>Diseño y desarrollo de una presencia web responsive con HTML semántico, CSS moderno y JavaScript vanilla. Incluye SEO técnico, Open Graph, accesibilidad, navegación móvil y soporte para preferencias de movimiento reducido.</p>
+            <div class="tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>SEO</span><span>Accesibilidad</span><span>GitHub Pages</span></div>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://netlleuger.github.io/" target="_blank" rel="noopener noreferrer">Abrir web →</a>
+              <a class="btn btn-secondary" href="https://github.com/netlleuger/netlleuger.github.io" target="_blank" rel="noopener noreferrer">Ver código</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="proceso">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">Cómo trabajo</div>
+          <h2>Directo, claro y <span class="gradient-text">sin letra pequeña.</span></h2>
+          <p>Un proceso sencillo para que sepas qué vamos a hacer antes de empezar.</p>
+        </div>
+        <div class="process">
+          <article class="step reveal"><h3>Cuéntame tu idea</h3><p>Me explicas tu negocio, qué necesitas y qué quieres conseguir con la web.</p></article>
+          <article class="step reveal"><h3>Definimos la solución</h3><p>Te propongo una estructura y una solución técnica ajustadas al proyecto.</p></article>
+          <article class="step reveal"><h3>Publicamos</h3><p>Construimos, revisamos y dejamos la web preparada para que tus clientes puedan encontrarte y contactarte.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre-mi">
+      <div class="container">
+        <div class="proof">
+          <div class="proof-copy reveal">
+            <div class="kicker">Sobre mí</div>
+            <h2>Experiencia profesional + <span class="gradient-text">desarrollo web.</span></h2>
+            <p>Soy Petro Poliakov. Estoy finalizando mi formación profesional en confección y publicación de páginas web y he trabajado durante más de 20 años en gestión de proyectos, coordinación y resolución de problemas técnicos.</p>
+            <p>Ahora aplico esa experiencia al desarrollo web: entender una necesidad, organizarla y convertirla en una solución funcional.</p>
+          </div>
+          <div class="stats reveal">
+            <div class="stat"><strong>20+</strong><span>Años de experiencia profesional</span></div>
+            <div class="stat"><strong>HTML</strong><span>HTML5 semántico y accesible</span></div>
+            <div class="stat"><strong>CSS</strong><span>Responsive, Flexbox y diseño moderno</span></div>
+            <div class="stat"><strong>JS</strong><span>DOM, eventos y lógica de interfaz</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">Experiencia</div>
+          <h2>Una base profesional que va <span class="gradient-text">más allá del código.</span></h2>
+          <p>Gestión, coordinación, atención al detalle y resolución de problemas forman parte de mi forma de trabajar.</p>
+        </div>
+        <div class="experience">
+          <article class="card reveal"><div class="date">2023 — 2026</div><h3>SIP Maresme</h3><div class="company">Control de acceso y seguridad · Barcelona</div><p>Trabajo técnico con CCTV, control de acceso y sistemas de alarma, diagnóstico y resolución de incidencias.</p></article>
+          <article class="card reveal"><div class="date">2018 — 2021</div><h3>Sanolbar S.L.</h3><div class="company">Encargado de obras · Barcelona</div><p>Coordinación de reformas, equipos, proveedores, presupuestos y control de calidad.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="contact-wrap reveal">
+          <div class="kicker">Primer paso</div>
+          <h2>¿Tienes un proyecto? <span class="gradient-text">Hablemos.</span></h2>
+          <p>Cuéntame qué necesitas. Podemos hablar por WhatsApp, email o LinkedIn y valorar juntos el proyecto.</p>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="https://wa.me/34632248238?text=Hola%20Petro%2C%20he%20visto%20netlleuger%20y%20me%20gustar%C3%ADa%20hablar%20sobre%20una%20web." target="_blank" rel="noopener noreferrer">WhatsApp →</a>
+            <a class="btn btn-secondary" href="mailto:netlleuger@gmail.com?subject=Proyecto%20web">netlleuger@gmail.com</a>
+            <a class="btn btn-secondary" href="https://www.linkedin.com/in/petro-polyakov-a09a90238/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+          <div class="contact-meta">Barcelona · Catalunya · Proyectos online</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <span>© 2026 netlleuger · Petro Poliakov</span>
+      <span>Desarrollo web · Barcelona · España</span>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('#nav-menu');
+    toggle?.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.setAttribute('aria-label', open ? 'Abrir menú' : 'Cerrar menú');
+      menu.classList.toggle('open', !open);
+    });
+    menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Abrir menú');
+      menu.classList.remove('open');
+    }));
+
+    const items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
         });
-
-        // Close menu when a link is clicked
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        // --- Scroll Reveal Animation ---
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        reveals.forEach(el => observer.observe(el));
-    </script>
-
+      }, { threshold: .12 });
+      items.forEach(item => observer.observe(item));
+    } else {
+      items.forEach(item => item.classList.add('visible'));
+    }
+  </script>
 </body>
 </html>
