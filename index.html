@@ -148,7 +148,7 @@
 
     .project { display:grid; grid-template-columns: 1.05fr .95fr; gap: 0; border: 1px solid var(--border); border-radius: 24px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
     .project-visual { min-height: 380px; display:grid; place-items:center; padding: 35px; background: radial-gradient(circle at 50% 40%,rgba(0,198,255,.12),transparent 42%), #080b11; }
-    .project-visual img { width: min(90%, 560px); border-radius: 15px; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+    .project-visual img { display: block; width: min(90%, 560px); max-width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; object-position: center; border-radius: 15px; box-shadow: 0 24px 60px rgba(0,0,0,.45);}
     .project-info { padding: 44px; display:flex; flex-direction:column; justify-content:center; }
     .tag { display:inline-flex; width:max-content; padding:6px 10px; border-radius:999px; border:1px solid rgba(0,198,255,.18); color:var(--cyan); background:rgba(0,198,255,.06); font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; margin-bottom:16px; }
     .project-info h3 { font-size: 1.7rem; margin-bottom: 12px; }
@@ -315,7 +315,7 @@
         </div>
         <article class="project reveal">
           <div class="project-visual">
-            <img src="og-image.png" alt="Vista previa de la identidad visual de netlleuger" width="1200" height="630" loading="lazy" decoding="async">
+            <img src="og-image.png" alt="Vista previa de la identidad visual de netlleuger" loading="lazy" decoding="async">
           </div>
           <div class="project-info">
             <span class="tag">Proyecto propio · Producción</span>
